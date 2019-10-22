@@ -2,8 +2,9 @@
 
 ```js
 //Creating a simple web server
-const fs = require('fs')
-const http = require('http')
+const fs = require('fs');   //fs module stands for file system
+                            //read from file
+const http = require('http'); 
 
 // SERVER
 const server = http.createServer((req, res) => {

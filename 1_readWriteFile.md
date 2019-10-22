@@ -3,6 +3,7 @@
 - reading and writing from files
 ```js
 const fs = require('fs');
+//fs module stands for file system
 
 const textIn = fs.readFileSync('./txt/input.txt', 'utf-8')
 console.log(textIn)
