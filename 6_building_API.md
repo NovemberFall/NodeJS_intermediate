@@ -223,3 +223,59 @@ const tours = JSON.parse(
 - for here, we don't have middleware, so we get `undefined`
 - if we use vscode Colonize plugin, we get the same result
 ![](img/2019-12-09-10-28-05.png)
+
+- now try to add a new object with json string
+```js
+//Handling POST method
+const fs = require('fs');
+const express = require('express');
+
+const app = express();
+app.use(express.json()); //middleware, 中间件
+
+const tours = JSON.parse(
+    fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+);
+
+//try to use json
+app.get('/api/v1/tours', (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        results: tours.length,
+        data: {
+            tours: tours
+        }
+    })
+})
+
+app.post('/api/v1/tours', (req, res) => {
+    // console.log(req.body);
+
+    const newId = tours[tours.length - 1].id + 1;
+    const newTour = Object.assign({ id: newId }, req.body);
+
+    tours.push(newTour);
+    fs.writeFile(`${__dirname}/dev-data/data/tours-simple.json`, JSON.stringify(tours),
+        err => {
+            res.status(201).json({
+                status: 'success',
+                data: {
+                    tour: newTour
+                }
+            });
+        }
+    )
+})
+
+const port = 3000;
+app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+});
+```
+![](img/2019-12-09-10-49-34.png)
+- so we send the request
+- we try to send twice
+![](img/2019-12-09-10-53-26.png)
+- id 9, id 10, that means we have sent twice
+![](img/2019-12-09-10-54-00.png)
+- the result is 11, since `results: tours.length`
