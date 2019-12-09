@@ -81,3 +81,37 @@ app.post('/', (req, res) => {
 ### APIS and RESTful API Design
 #### Application Programming Interface: a piece of software that can be used by another piece of software, in order to allow applications to talk to each other
 ![](img/2019-12-09-00-29-11.png)
+![](img/2019-12-09-00-43-32.png)
+
+
+### Starting Our API: Handing GET Requests
+- we have json data in folder data
+- so we can read data from .json file
+```js
+const fs = require('fs');
+const express = require('express');
+
+const app = express();
+
+const tours = JSON.parse(
+    fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+);
+
+//try to use json
+app.get('/api/v1/tours', (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        data: {
+            tours: tours
+        }
+    })
+})
+
+
+
+const port = 3000;
+app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+});
+```
+![](img/2019-12-09-01-08-13.png)

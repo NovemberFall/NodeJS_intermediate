@@ -4,5 +4,13 @@
 GET {{uri}}
 
 ###
+GET https://www.natours.dev/api/v1/tours
+
+
+
+
+###
 POST {{uri}}
 
+###
+GET {{uri}}/api/v1/tours
