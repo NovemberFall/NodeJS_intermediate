@@ -75,4 +75,8 @@ app.post('/', (req, res) => {
 })
 ```
 ![](img/2019-12-09-00-22-28.png)
+---
 
+
+### APIS and RESTful API Design
+#### Application Programming Interface: a piece of software taht can be used by another piece of sotfware, in order to allow applications to talk to each other
