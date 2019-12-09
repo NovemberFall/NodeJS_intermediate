@@ -114,7 +114,7 @@ app.get('/api/v1/tours', (req, res) => {
 })
 
 app.post('/api/v1/tours', (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     res.send('Done');
 })
 

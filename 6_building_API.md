@@ -204,3 +204,22 @@ App running on port 3000...
 { name: 'Test Tour', duration: 10, difficulty: 'easy' }
 ```
 - because I send API to our node.js server
+- if we don't use `app.use(express.json()); //middleware, 中间件`
+- we can't receive json data
+- let's do it
+```js
+//Handling POST method
+const fs = require('fs');
+const express = require('express');
+
+const app = express();
+// app.use(express.json()); //middleware, 中间件
+
+const tours = JSON.parse(
+    fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+);
+```
+![](img/2019-12-09-10-27-00.png)
+- for here, we don't have middleware, so we get `undefined`
+- if we use vscode Colonize plugin, we get the same result
+![](img/2019-12-09-10-28-05.png)
