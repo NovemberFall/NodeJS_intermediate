@@ -196,3 +196,11 @@ app.listen(port, () => {
 ![](img/2019-12-09-10-01-59.png)
 - since our POST method, `console.log(req.body)`
 ![](img/2019-12-09-10-03-14.png)
+- remember, when I click `send` on Postman, then our terminal console 
+```js
+[nodemon] restarting due to changes...
+[nodemon] starting `node app.js`
+App running on port 3000...
+{ name: 'Test Tour', duration: 10, difficulty: 'easy' }
+```
+- because I send API to our node.js server
