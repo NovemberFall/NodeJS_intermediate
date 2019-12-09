@@ -44,6 +44,7 @@ const server = http.createServer((req, res) => {
                 throw error;
             }
             var comments = JSON.stringify(results);
+            console.log(comments);
             res.end(comments);
         });
         conn.end();

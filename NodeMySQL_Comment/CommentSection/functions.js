@@ -5,6 +5,7 @@ function loadComments() {
         if (this.readyState == 4 && this.status == 200) {
             var result = this.responseText;
             var results = JSON.parse(result);
+            console.log(results);
 
             results.forEach((comment) => {
                 var node = document.createElement("div");
