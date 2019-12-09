@@ -133,3 +133,66 @@ app.get('/api/v1/tours', (req, res) => {
 - we have 9 results.
 ![](img/2019-12-09-01-10-48.png)
 - but this is file-based API
+---
+
+
+
+### Handling POST Requests
+```js
+//Handling POST method
+const fs = require('fs');
+const express = require('express');
+
+const app = express();
+app.use(express.json()); //middleware, 中间件
+
+const tours = JSON.parse(
+    fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+);
+
+//try to use json
+app.get('/api/v1/tours', (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        results: tours.length,
+        data: {
+            tours: tours
+        }
+    })
+})
+
+app.post('/api/v1/tours', (req, res) => {
+    console.log(req.body);
+    res.send('Done');
+})
+
+const port = 3000;
+app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+});
+```
+
+- click Collections, + New Collection
+- click save
+![](img/2019-12-09-09-51-22.png)
+![](img/2019-12-09-09-53-05.png)
+![](img/2019-12-09-09-54-29.png)
+- 这里我们使用Postman
+- POST method
+![](img/2019-12-09-09-55-18.png)
+- click save
+![](img/2019-12-09-09-57-50.png)
+![](img/2019-12-09-09-57-59.png)
+- use POST
+- choose body
+- click raw
+```json
+{
+	"name": "Test Tour",
+	"duration": 10,
+	"difficulty": "easy"
+}
+```
+![](img/2019-12-09-10-01-59.png)
+- since our POST method, `console.log(req.body)`
+![](img/2019-12-09-10-03-14.png)
