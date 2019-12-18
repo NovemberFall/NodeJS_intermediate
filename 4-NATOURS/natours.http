@@ -10,6 +10,8 @@ GET https://www.natours.dev/api/v1/tours
 ###
 POST {{uri}}
 
+
+
 ### Get all tours
 GET {{uri}}/api/v1/tours
 
