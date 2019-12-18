@@ -32,5 +32,28 @@ GET {{uri}}/api/v1/tours/5
 GET {{uri}}/api/v1/tours/7/23/45
 
 
+
+
+
 ### For Invalid ID, example
 GET {{uri}}/api/v1/tours/23
+
+
+
+
+
+### Get Tour
+PATCH {{uri}}/api/v1/tours/3
+
+Content-Type: application/json
+
+{
+	"duration": 15,
+}
+
+
+
+
+
+### Delete Tour
+DELETE {{uri}}/api/v1/tours/7
