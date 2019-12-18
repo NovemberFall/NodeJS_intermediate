@@ -23,7 +23,7 @@ Content-Type: application/json
 	"difficulty": "easy"
 }
 
-###
+### Get the specific tour that we picked this ID
 GET {{uri}}/api/v1/tours/5
 
 
