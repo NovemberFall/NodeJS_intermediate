@@ -382,3 +382,39 @@ const getAllTours = (req, res) => {
 ![](img/2019-12-18-13-08-58.png)
 - becaue, this time, the middle is at first, before `app.route('/api/v1/tours/:id')`
 - thus, we see the middleware 
+
+### another example:
+```js
+const app = express();
+app.use(express.json()); //middleware, 中间件
+
+app.use((req, res, next) => { //middleware
+    console.log('Hello from the middleware 🐳');
+    next();
+});
+
+app.use((req, res, next) => {
+    req.requestTime = new Date().toISOString();
+    next();
+});
+
+const tours = JSON.parse(
+    fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+);
+
+const getAllTours = (req, res) => {
+    console.log(req.requestTime);
+
+    res.status(200).json({
+        status: 'success',
+        requestedAt: req.requestTime,
+        results: tours.length,
+        data: {
+            tours: tours
+        }
+    });
+};
+```
+![](img/2019-12-18-13-17-47.png)
+![](img/2019-12-18-13-18-17.png)
+- we see the requestTime from middleware
