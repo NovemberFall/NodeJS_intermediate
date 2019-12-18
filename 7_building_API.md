@@ -172,4 +172,40 @@ app.route('/api/v1/tours/:id')
 ```
 ---
 
+## Middleware and the Request-Response Cycle
+![](img/2019-12-18-12-32-48.png)
+![](img/2019-12-18-12-33-42.png)
+---
+![](img/2019-12-18-12-33-56.png)
+![](img/2019-12-18-12-34-20.png)
+---
+![](img/2019-12-18-12-34-53.png)
+![](img/2019-12-18-12-35-21.png)
+---
+![](img/2019-12-18-12-36-05.png)
+---
 
+
+
+
+
+
+## Create Our Own Middleware
+- update app.js
+```js
+//Create Our Own Middleware
+const fs = require('fs');
+const express = require('express');
+
+const app = express();
+app.use(express.json()); //middleware, 中间件
+
+app.use((req, res, next) => {
+    console.log('Hello from the middleware 🐳');
+    next();
+});
+```
+![](img/2019-12-18-12-47-09.png)
+- let's get all tours
+- and then we see the middleware's req, res, and next()
+![](img/2019-12-18-12-46-52.png)
