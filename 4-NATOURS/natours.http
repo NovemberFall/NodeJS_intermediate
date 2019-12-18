@@ -22,3 +22,11 @@ Content-Type: application/json
 	"duration": 10,
 	"difficulty": "easy"
 }
+
+###
+GET {{uri}}/api/v1/tours/5
+
+
+
+###
+GET {{uri}}/api/v1/tours/7/23/45

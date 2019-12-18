@@ -272,6 +272,16 @@ app.listen(port, () => {
     console.log(`App running on port ${port}...`);
 });
 ```
+- Object.assing()
+```js
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+const returnedTarget = Object.assign(target, source);
+console.log(target);
+// expected output: Object { a: 1, b: 4, c: 5 }
+console.log(returnedTarget);
+// expected output: Object { a: 1, b: 4, c: 5 }
+```
 ![](img/2019-12-09-10-49-34.png)
 - so we send the request
 - we try to send twice
@@ -279,3 +289,35 @@ app.listen(port, () => {
 - id 9, id 10, that means we have sent twice
 ![](img/2019-12-09-10-54-00.png)
 - the result is 11, since `results: tours.length`
+---
+
+### Responding to URL Parameters
+```js
+app.get('/api/v1/tours/:id', (req, res) => {
+    console.log(req.params);
+    res.status(200).json({
+        status: 'success',
+        // results: tours.length,
+        // data: {
+        //     tours: tours
+        // }
+    })
+})
+```
+![](img/2019-12-18-09-55-24.png)
+![](img/2019-12-18-09-55-34.png)
+- you see, that ID is 5
+
+- **one more example**
+- update app.js
+```js
+app.get('/api/v1/tours/:id/:x/:y', (req, res) => {
+    console.log(req.params);
+    res.status(200).json({
+        status: 'success',
+    })
+})
+```
+![](img/2019-12-18-09-58-57.png)
+![](img/2019-12-18-09-59-05.png)
+- id: 7, x: 23, y:45
