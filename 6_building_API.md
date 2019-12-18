@@ -1,4 +1,4 @@
-### Installing Postman
+## Installing Postman
 - install Postman for mac
 
 - test: dog.ceo
@@ -78,13 +78,13 @@ app.post('/', (req, res) => {
 ---
 
 
-### APIS and RESTful API Design
+## APIS and RESTful API Design
 #### Application Programming Interface: a piece of software that can be used by another piece of software, in order to allow applications to talk to each other
 ![](img/2019-12-09-00-29-11.png)
 ![](img/2019-12-09-00-43-32.png)
 
 
-### Starting Our API: Handing GET Requests
+## Starting Our API: Handing GET Requests
 - we have json data in folder data
 - so we can read data from .json file
 ```js
@@ -137,7 +137,7 @@ app.get('/api/v1/tours', (req, res) => {
 
 
 
-### Handling POST Requests
+## Handling POST Requests
 ```js
 //Handling POST method
 const fs = require('fs');
@@ -291,7 +291,7 @@ console.log(returnedTarget);
 - the result is 11, since `results: tours.length`
 ---
 
-### Responding to URL Parameters
+## Responding to URL Parameters
 ```js
 app.get('/api/v1/tours/:id', (req, res) => {
     console.log(req.params);
@@ -321,3 +321,111 @@ app.get('/api/v1/tours/:id/:x/:y', (req, res) => {
 ![](img/2019-12-18-09-58-57.png)
 ![](img/2019-12-18-09-59-05.png)
 - id: 7, x: 23, y:45
+
+#### find() function
+- find(), which Get the value of the first element in the array that has a value satisfy the condition
+- app.js
+```js
+app.get('/api/v1/tours/:id', (req, res) => {
+    console.log(req.params);
+
+    const tour = tours.find(el => (el.id === req.params));
+    res.status(200).json({
+        status: 'success',
+    });
+})
+```
+- but the problem is `el.id` and `req.params` are both `String`:
+```js
+app.get('/api/v1/tours/:id', (req, res) => {
+    console.log(req.params);
+    console.log(req.params.id);
+    console.log(typeof (req.params.id));
+    const id = req.params.id * 1;
+    const tour = tours.find(el => (el.id === req.params));
+    res.status(200).json({
+        status: 'success',
+    });
+})
+```
+![](img/2019-12-18-10-26-12.png)
+- we click GET
+![](img/2019-12-18-10-26-31.png)
+- we see the typeof is String, so we need to convert to number
+```js
+app.get('/api/v1/tours/:id', (req, res) => {
+    console.log(req.params);
+    console.log(req.params.id);
+    console.log(typeof (req.params.id));
+
+    const id = req.params.id * 1;
+
+    console.log("after converting..." + typeof (id));
+
+    const tour = tours.find(el => (el.id === id));
+    res.status(200).json({
+        status: 'success',
+        data: {
+            tour
+        }
+    });
+});
+```
+![](img/2019-12-18-10-28-57.png)
+![](img/2019-12-18-10-32-06.png)
+- remember: use id to check if el.id is equal that id we want to find
+
+#### let's try an Invalid ID
+```js
+app.get('/api/v1/tours/:id', (req, res) => {
+    console.log(req.params);
+    console.log(req.params.id);
+    console.log(typeof (req.params.id));
+
+    const id = req.params.id * 1;
+    console.log("after converting..." + typeof (id));
+
+    if (id > tours.length) {
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invalid ID'
+        });
+    }
+
+    const tour = tours.find(el => (el.id === id));
+    res.status(200).json({
+        status: 'success',
+        data: {
+            tour
+        }
+    });
+});
+```
+![](img/2019-12-18-11-13-22.png)
+---
+- the 2nd way
+```js
+app.get('/api/v1/tours/:id', (req, res) => {
+    console.log(req.params);
+    console.log(req.params.id);
+    console.log(typeof (req.params.id));
+
+    const id = req.params.id * 1;
+    console.log("after converting..." + typeof (id));
+
+    const tour = tours.find(el => (el.id === id));
+    if (!tour) { //if tour undefined
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invalid ID'
+        });
+    }
+    res.status(200).json({
+        status: 'success',
+        data: {
+            tour
+        }
+    });
+});
+```
+- the same result 404, Invalid ID

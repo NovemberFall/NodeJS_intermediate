@@ -30,3 +30,7 @@ GET {{uri}}/api/v1/tours/5
 
 ###
 GET {{uri}}/api/v1/tours/7/23/45
+
+
+### For Invalid ID, example
+GET {{uri}}/api/v1/tours/23
