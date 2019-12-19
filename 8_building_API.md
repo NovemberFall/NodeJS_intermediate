@@ -83,3 +83,85 @@ app.use((req, res, next) => {
 ![](img/2019-12-18-13-35-35.png)
 ![](img/2019-12-18-13-35-49.png)
 - we get the above info `GET /api/v1/tours 200 3.354 ms - 8744`
+- we also can test 404
+![](img/2019-12-18-14-25-53.png)
+![](img/2019-12-18-14-26-07.png)
+---
+
+
+
+## Implementing the Users Rotues
+- create a new app2.js
+```js
+const getAllUsers = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined!'
+    });
+};
+
+const getUser = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined!'
+    });
+};
+
+const createUser = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined!'
+    });
+};
+
+const updateUser = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined!'
+    });
+};
+
+const deleteUser = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined!'
+    });
+};
+
+
+
+/*try to use json*/
+
+// app.get('/api/v1/tours', getAllTours);
+// app.post('/api/v1/tours', createTour);
+// app.get('/api/v1/tours/:id', getTour);
+// app.patch('/api/v1/tours/:id', updateTour);
+// app.delete('/api/v1/tours/:id', deleteTour);
+
+//3. ROUTE
+app.route('/api/v1/tours')
+    .get(getAllTours)
+    .post(createTour);
+
+app.route('/api/v1/tours/:id')
+    .get(getTour)
+    .patch(updateTour)
+    .delete(deleteTour);
+
+app.route('/api/v1/users')
+    .get(getAllUsers)
+    .post(createUser);
+
+app.route('/api/v1/users/:id')
+    .get(getUser)
+    .patch(updateUser)
+    .delete(deleteUser);
+
+//4. START SERVE    
+const port = 3000;
+app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+    console.log(`${__dirname}`)
+});
+```
+![](img/2019-12-19-13-45-21.png)

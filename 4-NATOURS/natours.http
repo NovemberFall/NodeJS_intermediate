@@ -59,3 +59,9 @@ Content-Type: application/json
 
 ### Delete Tour
 DELETE {{uri}}/api/v1/tours/7
+
+
+
+
+### Get all users
+GET {{uri}}/api/v1/users
