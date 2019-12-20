@@ -104,5 +104,8 @@ app.listen(port, () => {
     console.log(`${__dirname}`)
 });
 ```
+- update config.env
+![](img/2019-12-20-12-08-40.png)
+
 - run `npm start`, since we configed in package.json
-![](img/2019-12-20-12-03-11.png)
+![](img/2019-12-20-12-08-58.png)
