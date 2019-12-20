@@ -104,3 +104,17 @@ app.listen(port, () => {
 ---
 
 ### now we delete tours from Cluster0, 
+![](img/2019-12-20-14-12-09.png)
+- click collections
+![](img/2019-12-20-14-12-42.png)
+- drop tours
+---
+
+
+## What is Mongoose?
+![](img/2019-12-20-14-17-59.png)
+---
+
+
+
+## Creating a Simple Tour Model
