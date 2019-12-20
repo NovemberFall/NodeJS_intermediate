@@ -168,6 +168,7 @@ switched to db natours-test
 ### connect 
 ![](img/2019-12-20-08-44-29.png)
 - Note: replace the <password> by your password that you created
+![](img/2019-12-20-08-49-51.png)
 ###
 - click copy
 - create a new DATABASE
@@ -178,10 +179,22 @@ switched to db natours-test
 - click `cluster0`
 ![](img/2019-12-20-08-41-39.png)
 - click Collections
+![](img/2019-12-20-08-59-25.png)
+- connected
 
+### ADD a new IP
+![](img/2019-12-20-09-01-25.png)
 
+- go back
+![](img/2019-12-20-09-02-19.png)
+- click connect again
+![](img/2019-12-20-09-02-55.png)
+- connect to shell
+![](img/2019-12-20-09-03-28.png)
+- COPY
 
-
+### now try to connect to hosted mongo shell
+![](img/2019-12-20-09-08-52.png)
 
 
 
