@@ -602,11 +602,10 @@ const userRouter = require('./routes/userRoutes');
 const app = express();
 
 //1. middleware
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
-
-// app.use(morgan('dev'));
 
 app.use(express.json()); //middleware, 中间件
 app.use(express.static(`${__dirname}/public`));//set public to be root folder, thus we don't need to input `public/`
@@ -624,9 +623,6 @@ app.use((req, res, next) => {//middleware
 });
 
 //3. ROUTE
-
-
-
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
