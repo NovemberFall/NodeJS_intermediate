@@ -15,7 +15,12 @@ POST {{uri}}
 ### Get all tours
 GET {{uri}}/api/v1/tours
 
-###
+
+
+
+
+
+### Create a new Tour
 POST {{uri}}/api/v1/tours
 Content-Type: application/json
 
@@ -24,6 +29,13 @@ Content-Type: application/json
 	"duration": 10,
 	"difficulty": "easy"
 }
+
+
+
+
+
+
+
 
 ### Get the specific tour that we picked this ID
 GET {{uri}}/api/v1/tours/5
@@ -65,3 +77,25 @@ DELETE {{uri}}/api/v1/tours/7
 
 ### Get all users
 GET {{uri}}/api/v1/users
+
+
+
+
+
+
+
+
+
+
+
+
+### Create a new Tour,   For mutltiple middleware
+POST {{uri}}/api/v1/tours
+Content-Type: application/json
+
+{
+	"name": "Test Tour",
+	"duration": 10,
+	"difficulty": "easy",
+	"price": 100
+}

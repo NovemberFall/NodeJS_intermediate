@@ -442,7 +442,77 @@
 
 
 
-//A Better File Structure
+// //A Better File Structure
+// const express = require('express');
+// const morgan = require('morgan');
+
+// const tourRouter = require('./routes/tourRoutes');
+// const userRouter = require('./routes/userRoutes');
+
+// const app = express();
+
+// //1. middleware
+// app.use(morgan('dev'));
+// app.use(express.json()); //middleware, 中间件
+
+// app.use((req, res, next) => { //middleware
+//     console.log('Hello from the middleware 🐳');
+//     next();
+// });
+
+// app.use((req, res, next) => {//middleware
+//     req.requestTime = new Date().toISOString();
+//     next();
+// });
+
+
+// /*try to use json*/
+
+// // app.get('/api/v1/tours', getAllTours);
+// // app.post('/api/v1/tours', createTour);
+// // app.get('/api/v1/tours/:id', getTour);
+// // app.patch('/api/v1/tours/:id', updateTour);
+// // app.delete('/api/v1/tours/:id', deleteTour);
+
+// //3. ROUTE
+
+
+
+
+// app.use('/api/v1/tours', tourRouter);
+// app.use('/api/v1/users', userRouter);
+
+// module.exports = app;   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//serving static files
 const express = require('express');
 const morgan = require('morgan');
 
@@ -454,6 +524,9 @@ const app = express();
 //1. middleware
 app.use(morgan('dev'));
 app.use(express.json()); //middleware, 中间件
+app.use(express.static(`${__dirname}/public`));//set public to be root folder, thus we don't need to input `public/`
+//中间件获得静态文件
+//middleware, which get the static files
 
 app.use((req, res, next) => { //middleware
     console.log('Hello from the middleware 🐳');
