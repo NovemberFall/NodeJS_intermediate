@@ -116,6 +116,7 @@ switched to db natours-test
 
 ###  lt means "less than",    gte mean "great thatn equal"
 ```
+## CRUD: Updating Documents
 
 
 
@@ -165,8 +166,17 @@ switched to db natours-test
 - choose: `Connect with MongoDB Compass`
 ![](img/2019-12-19-21-41-45.png)
 - click copy
+- create a new DATABASE
+![](img/2019-12-20-07-30-29.png)
+- insert DOCUMENT
+![](img/2019-12-20-08-39-36.png)
+![](img/2019-12-20-08-40-58.png)
+- click `cluster0`
+![](img/2019-12-20-08-41-39.png)
+- click Collections
 
-
+### connect 
+![](img/2019-12-20-08-44-29.png)
 
 
 
