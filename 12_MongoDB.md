@@ -165,6 +165,10 @@ switched to db natours-test
 ![](img/2019-12-19-21-40-33.png)
 - choose: `Connect with MongoDB Compass`
 ![](img/2019-12-19-21-41-45.png)
+### connect 
+![](img/2019-12-20-08-44-29.png)
+- Note: replace the <password> by your password that you created
+###
 - click copy
 - create a new DATABASE
 ![](img/2019-12-20-07-30-29.png)
@@ -175,8 +179,7 @@ switched to db natours-test
 ![](img/2019-12-20-08-41-39.png)
 - click Collections
 
-### connect 
-![](img/2019-12-20-08-44-29.png)
+
 
 
 
