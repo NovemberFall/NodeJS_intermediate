@@ -15,3 +15,10 @@ app.listen(port, () => {
 });
 ```
 ![](img/2019-12-18-11-07-55.png)
+
+
+## MongoDB start
+```ruby
+cd cd /usr/local/bin
+brew services start mongodb-community
+```
