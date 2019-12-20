@@ -802,3 +802,58 @@ module.exports = router;
 ```
 ![](img/2019-12-19-15-52-41.png)
 - done!
+---
+
+
+## Create server.js file
+```js
+const app = require('./app2');
+const port = 3000;
+app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+    console.log(`${__dirname}`)
+});
+```
+### change app2.js's codes
+```js
+//A Better File Structure
+const express = require('express');
+const morgan = require('morgan');
+
+const tourRouter = require('./routes/tourRoutes');
+const userRouter = require('./routes/userRoutes');
+
+const app = express();
+
+//1. middleware
+app.use(morgan('dev'));
+app.use(express.json()); //middleware, 中间件
+
+app.use((req, res, next) => { //middleware
+    console.log('Hello from the middleware 🐳');
+    next();
+});
+
+app.use((req, res, next) => {//middleware
+    req.requestTime = new Date().toISOString();
+    next();
+});
+
+/*try to use json*/
+
+// app.get('/api/v1/tours', getAllTours);
+// app.post('/api/v1/tours', createTour);
+// app.get('/api/v1/tours/:id', getTour);
+// app.patch('/api/v1/tours/:id', updateTour);
+// app.delete('/api/v1/tours/:id', deleteTour);
+
+//3. ROUTE
+app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/users', userRouter);
+
+module.exports = app;   
+```
+### let's correct package.json
+![](img/2019-12-19-16-05-47.png)
+### now we can run `npm start`
+![](img/2019-12-19-16-07-04.png)

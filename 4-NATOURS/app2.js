@@ -482,9 +482,4 @@ app.use((req, res, next) => {//middleware
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 
-//4. START SERVE    
-const port = 3000;
-app.listen(port, () => {
-    console.log(`App running on port ${port}...`);
-    console.log(`${__dirname}`)
-});
+module.exports = app;   
