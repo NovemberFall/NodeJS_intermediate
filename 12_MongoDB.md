@@ -195,7 +195,8 @@ switched to db natours-test
 
 ### now try to connect to hosted mongo shell
 ![](img/2019-12-20-09-08-52.png)
-
+- now everything is really interconnected(使互相连接)
+- 
 
 
 
