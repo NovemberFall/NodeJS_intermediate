@@ -86,17 +86,15 @@ console.log(process.env);
 ```js
 //Environment Variables
 const dotenv = require('dotenv');
-const app = require('./app2');
-
-//config the environment variables on `config.env`
 dotenv.config({ path: './config.env' });
 
+const app = require('./app2');
 
 //envrionment variables is global variables
 // console.log(app.get('env')); 
 
 //
-console.log(process.env);
+// console.log(process.env);
 
 const port = 3000;
 app.listen(port, () => {
@@ -105,7 +103,26 @@ app.listen(port, () => {
 });
 ```
 - update config.env
-![](img/2019-12-20-12-08-40.png)
+![](img/2019-12-20-12-14-20.png)
 
 - run `npm start`, since we configed in package.json
 ![](img/2019-12-20-12-08-58.png)
+
+- now we hope that `dotenv.config({ path: './config.env' });` happens onec
+- in app2.js
+```js
+//Environment Variables
+const express = require('express');
+const morgan = require('morgan');
+
+const tourRouter = require('./routes/tourRoutes');
+const userRouter = require('./routes/userRoutes');
+
+const app = express();
+
+//1. middleware
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
+
+```
