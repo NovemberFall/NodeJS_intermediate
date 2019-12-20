@@ -39,6 +39,84 @@ switched to db natours-test
 > show collections
 tours
 ```
+![](img/2019-12-19-22-45-42.png)
+---
+
+## CRUD: Creating Documents
+```sql
+> use natours-test
+switched to db natours-test
+> db.tours.insertMany([{ name: "The Sea Explorer", price: 497, rating: 4.8}, { name: "The Snow Adventure", price: 997, rating: 4.9, difficulty: "easy"}])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("5dfc6f19a59d9953f8ed265e"),
+		ObjectId("5dfc6f19a59d9953f8ed265f")
+	]
+}
+> db.tours.find()
+{ "_id" : ObjectId("5dfc6c4c6e50a7965244007e"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265e"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265f"), "name" : "The Snow Adventure", "price" : 997, "rating" : 4.9, "difficulty" : "easy" }
+```
+---
+
+## CRUD: Querying(Reading)
+```sql
+> db.tours.find()
+> use natours-test
+switched to db natours-test
+> db.tours.find()
+{ "_id" : ObjectId("5dfc6c4c6e50a7965244007e"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265e"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265f"), "name" : "The Snow Adventure", "price" : 997, "rating" : 4.9, "difficulty" : "easy" }
+> db.tours.find({ name: "The Forest Hiker"})
+{ "_id" : ObjectId("5dfc6c4c6e50a7965244007e"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+> db.tours.find({difficulty:"easy"})
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265f"), "name" : "The Snow Adventure", "price" : 997, "rating" : 4.9, "difficulty" : "easy" }
+> db.tours.find({ price: {$lte: 500} })
+{ "_id" : ObjectId("5dfc6c4c6e50a7965244007e"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265e"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+> db.tours.find({ price: {$lt: 500}, rating: {$gte: 4.8}})
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265e"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+> 
+> 
+> 
+> db.tours.find({ $or: [ {price:{$lt:500}, {rating: {$gte: 4.8}}} ] })
+2019-12-19T23:02:20.146-0800 E  QUERY    [js] uncaught exception: SyntaxError: expected property name, got '{' :
+@(shell):1:41
+> db.tours.find({ $or: [ {price:{$lt:500}}, {rating: {$gte: 4.8}} ] })
+{ "_id" : ObjectId("5dfc6c4c6e50a7965244007e"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265e"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265f"), "name" : "The Snow Adventure", "price" : 997, "rating" : 4.9, "difficulty" : "easy" }
+> 
+> 
+> 
+> 
+> db.tours.find({ $or: [ {price:{$lt:500}}, {rating: {$gte: 4.8}} ] })
+{ "_id" : ObjectId("5dfc6c4c6e50a7965244007e"), "name" : "The Forest Hiker", "price" : 297, "rating" : 4.7 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265e"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265f"), "name" : "The Snow Adventure", "price" : 997, "rating" : 4.9, "difficulty" : "easy" }
+> 
+> 
+> 
+> db.tours.find({ $or: [ {price:{$gt:500}}, {rating: {$gte: 4.8}} ] })
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265e"), "name" : "The Sea Explorer", "price" : 497, "rating" : 4.8 }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265f"), "name" : "The Snow Adventure", "price" : 997, "rating" : 4.9, "difficulty" : "easy" }
+> 
+> 
+> 
+> 
+> db.tours.find({ $or: [ {price:{$gt:500}}, {rating: {$gte: 4.8}} ] }, {name: 1})
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265e"), "name" : "The Sea Explorer" }
+{ "_id" : ObjectId("5dfc6f19a59d9953f8ed265f"), "name" : "The Snow Adventure" }
+> 
+
+
+
+###  lt means "less than",    gte mean "great thatn equal"
+```
+
 
 
 ## Using Compass App for CRUD
