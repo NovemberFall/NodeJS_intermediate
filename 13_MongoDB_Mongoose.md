@@ -245,4 +245,10 @@ const testTour = new Tour({
     },
 ```
 - thus, we get the rating's value is 4.5
+![](img/2019-12-24-15-06-39.png)
+---
+
+## Intro to Back-End Architecture(建筑学): MVC, Types of Logic, and More
+![](img/2019-12-24-15-46-05.png)
+![](img/2019-12-24-15-55-25.png)
 
