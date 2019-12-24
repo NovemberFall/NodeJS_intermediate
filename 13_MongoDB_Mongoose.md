@@ -221,3 +221,28 @@ app.listen(port, () => {
 ```
 ![](img/2019-12-24-10-03-43.png)
 
+- if we insert this testTour agian, it will generate error, since name is unique
+- but what if we insert a new tour, without price, see what happen:
+```js
+const testTour = new Tour({
+    name: 'The Park Camper'
+});
+```
+![](img/2019-12-24-14-55-52.png)
+- that error: A tour must have a value
+```js
+const testTour = new Tour({
+    name: 'The Park Camper',
+    price: 997
+});
+```
+![](img/2019-12-24-15-04-22.png)
+- for here, we didn't set rating, but its default is 4.5
+```js
+    rating: {
+        type: Number,
+        default: 4.5
+    },
+```
+- thus, we get the rating's value is 4.5
+

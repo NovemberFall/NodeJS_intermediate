@@ -207,9 +207,8 @@ const tourSchema = new mongoose.Schema({
 const Tour = mongoose.model('Tour', tourSchema);
 
 const testTour = new Tour({
-    name: 'The Forest Hiker',
-    rating: 4.7,
-    price: 497
+    name: 'The Park Camper',
+    price: 997
 });
 
 //save the tours collection into the database, save() return a promise
