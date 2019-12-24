@@ -9,6 +9,7 @@
 ![](img/2019-12-19-17-39-43.png)
 - next step:
     - create a folder where the database can then actually store the data
+    - run `mongod`
 
 #### Creating a Local Database
 - if a database doen't exit
