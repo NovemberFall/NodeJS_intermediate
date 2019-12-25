@@ -97,7 +97,7 @@ Content-Type: application/json
 	"name": "Test Tour",
 	"duration": 10,
 	"difficulty": "easy",
-	"price": 100
+	"price": 697
 }
 
 
@@ -166,3 +166,8 @@ Content-Type: application/json
 {
 	"price": "some price"
 }
+
+
+
+### Delete Tour, delete a tour from mongoDB 
+DELETE {{uri}}/api/v1/tours/5e03d94147bd90648127b923

@@ -347,5 +347,18 @@ exports.updateTour = async (req, res) => {
 -
 - change to Number
 ![](img/2019-12-24-21-19-13.png)
+---
+
+## Deleting Documents
+- create a document for testing
+![](img/2019-12-25-13-49-52.png)
+![](img/2019-12-25-13-50-12.png)
+---
+- now let's delete it
+![](img/2019-12-25-13-53-24.png)
+![](img/2019-12-25-13-56-12.png)
+---
+
+
 
 

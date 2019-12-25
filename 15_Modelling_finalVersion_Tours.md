@@ -1,0 +1,68 @@
+## final version for creating model
+- update tourModel.js
+```js
+const mongoose = require('mongoose');
+const tourSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, 'A tour must have a nme'],
+        unique: true, //we can't have tour documents with the same name
+        trim: true
+    },
+    duration: {
+        type: Number,
+        required: [true, 'A tour must have a duration']
+    },
+    maxGroupSize: {
+        type: Number,
+        required: [true, 'A tour must have a group size']
+    },
+    difficulty: {
+        type: String,
+        required: [true, 'A tour must have a difficulty']
+    },
+    rating: {
+        type: Number,
+        default: 4.5
+    },
+    ratingAverage: {
+        type: Number,
+        default: 4.5
+    },
+    ratingQuantity: {
+        type: Number,
+        default: 0
+    },
+    price: {
+        type: Number,
+        required: [true, 'A tour must have a price']
+    },
+    priceDiscount: Number,
+    summary: {
+        type: String,
+        trim: true,
+        required: [true, 'A tour must have a description']
+    },
+    description: {
+        type: String,
+        trim: true
+    },
+    imageCover: {
+        type: String,
+        required: [true, 'A tour must have a cover image']
+    },
+    images: [String],
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    },
+    startDates: [Date]
+});
+const Tour = mongoose.model('Tour', tourSchema);
+module.exports = Tour;
+```
+![](img/2019-12-25-15-23-02.png)
+![](img/2019-12-25-15-22-49.png)
+---
+- It's basically there to ensure the strings you save through the schema are properly trimmed. If you add { type: String, trim: true } to a field in your schema, then trying to save strings like "  hello", or "hello  ", or "  hello  ", would end up being saved as "hello" in Mongo - i.e. white spaces will be trimmed.
+- 
