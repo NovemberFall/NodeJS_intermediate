@@ -56,7 +56,7 @@ GET {{uri}}/api/v1/tours/23
 
 
 
-### Get Tour
+### Update Tour
 PATCH {{uri}}/api/v1/tours/3
 
 Content-Type: application/json
@@ -133,4 +133,36 @@ Content-Type: application/json
 
 {
 	"name": "Tim Tour"
+}
+
+
+
+
+
+
+
+
+
+
+### get one tour
+GET {{uri}}/api/v1/tours/5e02bdd974660d29def6b58c
+
+
+
+
+
+
+
+
+
+
+
+
+### Update Tour
+PATCH  {{uri}}/api/v1/tours/5e0297bf36bf9d0cbcce2d58
+
+Content-Type: application/json
+
+{
+	"price": "some price"
 }

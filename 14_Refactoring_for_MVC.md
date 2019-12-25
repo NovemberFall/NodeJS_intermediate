@@ -264,3 +264,88 @@ exports.deleteTour = (req, res) => {
 ![](img/2019-12-24-18-32-40.png)
 - because we already have the Test Tour 2, And so it coould not create another one
 ![](img/2019-12-24-18-35-51.png)
+---
+
+## Reading Documents
+- update tourController.js
+```js
+//Reading Documents
+const Tour = require('./../models/tourModel');
+
+exports.getAllTours = async (req, res) => {
+    try {
+        const tours = await Tour.find();
+
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            results: tours.length,
+            data: {
+                tours: tours
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
+```
+![](img/2019-12-24-19-11-39.png)
+- get one Tour
+```JS
+exports.getTour = async (req, res) => {
+    try {
+        const tour = await Tour.findById(req.params.id);
+        //Tour.findOne({ _id: req.params.id})
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                tour
+            }
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
+```
+![](img/2019-12-24-19-40-44.png)
+---
+
+
+## Updating Document
+- tourController.js
+```js
+exports.updateTour = async (req, res) => {
+    try {
+        const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        })
+        res.status(200).json({
+            status: 'success',
+            data: {
+                tour: tour
+            }
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err
+        })
+    }
+};
+```
+- since we have `runValidators: true`, thus if insert a data with different type, what happen?
+![](img/2019-12-24-21-18-29.png)
+---
+-
+- change to Number
+![](img/2019-12-24-21-19-13.png)
+
+
