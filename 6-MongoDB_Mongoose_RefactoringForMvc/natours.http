@@ -99,3 +99,38 @@ Content-Type: application/json
 	"difficulty": "easy",
 	"price": 100
 }
+
+
+
+
+
+
+
+
+
+### Create a new Tour,   For another way to create a new document
+POST {{uri}}/api/v1/tours
+Content-Type: application/json
+
+{
+	"name": "Test Tour 2",
+	"duration": 5,
+	"difficulty": "easy",
+	"price": 100,
+	"rating": 4.7
+}
+
+
+
+
+
+
+
+
+### Create a new Tour,   test for errors
+POST {{uri}}/api/v1/tours
+Content-Type: application/json
+
+{
+	"name": "Tim Tour"
+}
