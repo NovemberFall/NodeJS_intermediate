@@ -1,0 +1,7 @@
+@uri=http://127.0.01:3000 
+
+
+
+
+### Get all tours
+GET {{uri}}/api/v1/tours
