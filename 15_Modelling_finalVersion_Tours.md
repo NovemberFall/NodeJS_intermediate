@@ -180,6 +180,214 @@ if (process.argv[2] === '--import') {
 
 
 ## Making the API Better: Filtering
+- filter duration=5 & difficulty=easy, by building query string
+- we can print query string first
+- in tourController.js
+- 
+```js
+exports.getAllTours = async (req, res) => {
+    try {
+        console.log(req.query); //print out query string
+        const tours = await Tour.find();
 
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            results: tours.length,
+            data: {
+                tours: tours
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
+```
+- in moogoose.http
+![](img/2019-12-25-19-48-30.png)
+![](img/2019-12-25-19-48-48.png)
+---
+- update tourController.js
+```js
+exports.getAllTours = async (req, res) => {
+    try {
+        console.log(req.query);
+        const tours = await Tour.find({
+            duration: 5,
+            difficulty: 'easy'
+        });//for here, is hard code, for testing
 
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            results: tours.length,
+            data: {
+                tours: tours
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
+```
+![](img/2019-12-25-20-02-36.png)
+- show 2 results, with difficult=easy & duration=5
+-
+- 2nd way to filter
+- update tourController.js
+```js
+exports.getAllTours = async (req, res) => {
+    try {
+        console.log(req.query);
 
+        const tours = await Tour.find()
+            .where('duration').equals(5)
+            .where('difficulty').equals('easy');
+
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            results: tours.length,
+            data: {
+                tours: tours
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
+```
+- 3rd way to filter
+- update
+```js
+exports.getAllTours = async (req, res) => {
+    try {
+        console.log(req.query);
+
+        const tours = await Tour.find(req.query);
+
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            results: tours.length,
+            data: {
+                tours: tours
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
+```
+![](img/2019-12-25-20-14-02.png)
+---
+
+- print out all query string and excluded elements
+```js
+exports.getAllTours = async (req, res) => {
+    try {
+        const queryObj = { ...req.query };
+        const excludeFields = ['page', 'sort', 'limit', 'fields'];
+        excludeFields.forEach(el => delete queryObj[el]);
+
+        console.log(req.query, queryObj);
+
+        const tours = await Tour.find(req.query);
+
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            results: tours.length,
+            data: {
+                tours: tours
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
+```
+![](img/2019-12-25-22-13-34.png)
+![](img/2019-12-25-22-13-56.png)
+---
+-
+- update
+```js
+exports.getAllTours = async (req, res) => {
+    try {
+        const queryObj = { ...req.query };
+        const excludeFields = ['page', 'sort', 'limit', 'fields'];
+        excludeFields.forEach(el => delete queryObj[el]);
+
+        const tours = await Tour.find(queryObj);
+
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            results: tours.length,
+            data: {
+                tours: tours
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
+```
+- ignoreing all of these other fields
+- after excluded these fields,
+![](img/2019-12-25-22-19-44.png)
+---
+-
+- refactoring
+```js
+//Making the API Better: Filtering
+const Tour = require('./../models/tourModel');
+
+exports.getAllTours = async (req, res) => {
+    try {
+        //BUILD QUERY
+        const queryObj = { ...req.query };
+        const excludeFields = ['page', 'sort', 'limit', 'fields'];
+        excludeFields.forEach(el => delete queryObj[el]);
+
+        const query = Tour.find(queryObj);
+
+        //EXECUTE QUERY
+        const tours = await query;
+
+        //SEND RESPONSE
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            results: tours.length,
+            data: {
+                tours: tours
+            }
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            message: error
+        });
+    }
+};
+```
