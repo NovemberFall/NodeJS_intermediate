@@ -1,14 +1,31 @@
-//Making the API Better: Filtering
+//Making the API Better: Advanced Filtering
 const Tour = require('./../models/tourModel');
 
 exports.getAllTours = async (req, res) => {
     try {
         //BUILD QUERY
+        //1) Filtering
         const queryObj = { ...req.query };
+        // console.log(queryObj);//to see what query string is 
         const excludeFields = ['page', 'sort', 'limit', 'fields'];
         excludeFields.forEach(el => delete queryObj[el]);
 
-        const query = Tour.find(queryObj);
+        //2) Advanced filtering
+        let queryStr = JSON.stringify(queryObj); //here can't use const, since we need it mutate
+        // console.log(queryStr);
+
+        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+        /**
+         *  g flag, means Global, replace all matches, not just the first one
+         */
+        console.log(queryStr);
+        console.log(JSON.parse(queryStr));
+
+        // { difficulty: 'easy', duration: { $gte: 5 } }
+        // { difficulty: 'easy', duration: { gte: '5'} }
+        //gte, gt, lte, lt
+
+        const query = Tour.find(JSON.parse(queryStr));
 
         //EXECUTE QUERY
         const tours = await query;
