@@ -45,3 +45,13 @@ GET {{uri}}/api/v1/tours?duration[gte]=5&difficulty=easy
 
 ### Get some tours, advanced filter duration=5 & difficulty=easy, by building query string
 GET {{uri}}/api/v1/tours?duration[gte]=5&difficulty=easy&price[lt]=1500
+
+
+
+
+
+
+
+
+### Get some tours, advanced filter Sorting
+GET {{uri}}/api/v1/tours?sort=price,ratingsAverage
